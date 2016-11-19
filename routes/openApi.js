@@ -4,7 +4,7 @@
 
 module.exports = function (app, control) {
 
-    app.get('/api/hello', control('index'));
+    app.get('/api/demo1', control('demo/apiDemo1'));
 
-    app.post('/api/hello', control('index'));
+    app.post('/api/demo2', control('demo/apiDemo2'));
 };
