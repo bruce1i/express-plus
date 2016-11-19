@@ -1,4 +1,4 @@
-#express-plus-empty
+#express-plus
 
 ###版本
 express+: 1.0.0
