@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>demo</title>
+</head>
+<body>
+<h1>set session</h1>
+<p>使用 /demo/set-session?test=xxx 来设置测试session</p>
+
+<% if(session == null){ %>
+<p>* 你还没有设置session，可以按照上面的示例进行设置</p>
+<% }else { %>
+<p>* session：<%= session %> 已经设置成功。可以通过 /demo/get-session 进行查看。</p>
+<% } %>
+
+</body>
+</html>

@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>demo</title>
+</head>
+<body>
+<h1>get session</h1>
+
+<% if(session == null){ %>
+<p>你还没有设置session，使用 /demo/set-session?test=xxx 来设置测试session。</p>
+<% }else { %>
+<p>当前 session：<%= session %> </p>
+<% } %>
+
+</body>
+</html>
