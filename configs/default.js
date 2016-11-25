@@ -1,5 +1,5 @@
 /**
- * Created by lixun on 16/9/4.
+ * 配置文件
  */
 
 module.exports = {
@@ -24,5 +24,15 @@ module.exports = {
     log_file_name: 'err-file.log',
     log_save_to_mongodb: false,
     log_mongodb_connection: 'mongodb://10.211.55.16:27017/mydb',
+
+    /**
+     * api mock
+     * 关闭 'off'
+     * 打开 'on'
+     *
+     * api_set {apiName: http状态(200,500)} 例如：{'testApi':200} 目前只支持：200请求成功；500请求api服务器失败
+     */
+    mock_api_switch: 'off',
+    mock_api_set: {}
 
 };

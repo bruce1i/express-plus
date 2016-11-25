@@ -1,9 +1,18 @@
 /**
  * api请求方法（Promise调用）
+ *
+ * 警告：不能在promise里面直接抛异常(throw new Error())。需要reject，调用者在使用catch自己捕获处理。
+ * (node:5542) UnhandledPromiseRejectionWarning: Unhandled promise rejection (rejection id: 2): Error: tets
+ * (node:5542) DeprecationWarning: Unhandled promise rejections are deprecated. In the future, promise rejections that are not handled will terminate the Node.js process with a non-zero exit code.
  */
 
 var request = require('request');
 var apiSet = require('./api');
+// mock需要的引用
+var config = require('./config');
+var fs = require('fs');
+var path = require('path');
+
 
 function send(args) {
 
@@ -12,9 +21,6 @@ function send(args) {
     }
     else if (arguments.length > 1) {
         return all(arguments);
-    }
-    else {
-        throw new Error('httpsender:没有设置请求参数');
     }
 }
 
@@ -25,6 +31,11 @@ function send(args) {
 function one(args) {
 
     var p = new Promise(function (resolve, reject) {
+
+        // 模拟api返回数据
+        if (isMock(args, resolve, reject)) {
+            return;
+        }
 
         var requestOptions = {};
         var reqMethod = '';
@@ -51,9 +62,6 @@ function one(args) {
             requestOptions.url = apiSet[apiItems[1]];
 
             reqMethod = apiItems[0];
-        }
-        else {
-            throw new Error('httpsender:没有设置请求url');
         }
         //endregion
 
@@ -87,7 +95,11 @@ function one(args) {
             function (error, response, body) {
 
                 if (error) {
-                    reject('请求出错.');
+                    reject({
+                        rawError: error,
+                        errMessage: '请求出错',
+                        requestObj: args
+                    });
                 }
                 else {
 
@@ -100,7 +112,10 @@ function one(args) {
                         }
                         catch (e) {
                             /** 转换json失败，请求标示为失败 */
-                            reject('解析json数据出错.');
+                            reject({
+                                errMessage: '解析json数据出错',
+                                requestObj: args
+                            });
                         }
                     }
                     else {
@@ -127,6 +142,41 @@ function all(reqList) {
     }
 
     return Promise.all(promiseList);
+}
+
+function isMock(args, resolve, reject) {
+
+    if (config.mock_api_switch == 'on' && args.api != null) {
+        var mockApiSet = config.mock_api_set;
+        var mockApiName = args.api.split(':')[1];
+
+        // 当前api没有mock
+        if (mockApiSet[mockApiName] == null) {
+            return false;
+        }
+
+        // api返回状态
+        var apiStatus = mockApiSet[mockApiName];
+
+        if (apiStatus == 500) {
+            reject({
+                errMessage: '请求出错(mock)',
+                requestObj: args
+            });
+        }
+        else if (apiStatus == 200) {
+
+            var jsonFileSrc = path.join(__dirname, 'mock/api/' + mockApiName + '.json');
+
+            var result = fs.readFileSync(jsonFileSrc, 'utf8');
+
+            resolve(JSON.parse(result));
+        }
+
+        return true;
+    }
+
+    return false;
 }
 
 module.exports = {
