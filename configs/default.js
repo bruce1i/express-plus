@@ -17,10 +17,14 @@ module.exports = {
 
     /**
      * log 日志配置
+     *
+     * 备注：
+     * log文件储存在bin目录下
+     * mongodb连接字符串(需要验证）：'mongodb://name:pwd@localhost:port/db'
+     * mongodb连接字符串(不需要验证）：'mongodb://localhost:port/db'
      */
     log_print_to_console: true,
     log_save_to_file: false,
-    // log文件储存在bin目录下
     log_file_name: 'err-file.log',
     log_save_to_mongodb: false,
     log_mongodb_connection: 'mongodb://10.211.55.16:27017/mydb',
