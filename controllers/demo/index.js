@@ -7,6 +7,20 @@ var winston = require('winston');
 
 module.exports = {
 
+    testRedisSession: function (req, res, next) {
+
+        if (req.session.test == null) {
+            req.session.test = 1;
+        }
+        else {
+            req.session.test = req.session.test + 1;
+        }
+
+        req.session.abc = 'world';
+
+        res.send(req.session.test.toString());
+    },
+
     home: function (req, res, next) {
 
         res.render('demo/index');

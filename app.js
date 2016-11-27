@@ -7,10 +7,8 @@ var bodyParser = require('body-parser');
 
 //region express+配置项
 var config = require('./config');
+var session = require('./session');
 var routeLoad = require('./route');
-
-var session = require('express-session');
-var RedisStore = require('connect-redis')(session);
 
 require('./log');
 //endregion
@@ -37,39 +35,11 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-//region session
-if (config.session_store == 'default') {
+// session
+app.use(session.getConf());
+app.use(session.check());
 
-    app.use(session({
-        secret: 'default_secret',
-        resave: false,
-        saveUninitialized: true
-    }));
-}
-else if (config.session_store == 'redis') {
-
-    app.use(session({
-        secret: 'redis_secret',
-        resave: false,
-        saveUninitialized: true,
-        store: new RedisStore({
-            host: config.session_redis_host,
-            port: config.session_redis_port
-        })
-    }));
-
-    app.use(function (req, res, next) {
-
-        if (!req.session) {
-            return next(new Error('oh no')); // handle error
-        }
-
-        next(); // otherwise continue
-    });
-}
-//endregion
-
-//载入路由
+// 载入路由
 routeLoad(app);
 
 // catch 404 and forward to error handler

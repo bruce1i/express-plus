@@ -9,11 +9,21 @@ module.exports = {
 
     /**
      * session 配置
+     *
+     * session_expires:
+     * 过期时间，单位：秒. 0为不设置
+     *
+     * session_store:
+     * session存储模式(default/redis),default使用默认储存,不推荐使用在生产环境,会有内存泄漏问题。
+     *
+     * session_redis_pass:
+     * redis密码
      */
-    // session模式(default/redis),default使用默认储存,不推荐使用在生产环境,会有内存泄漏问题。
+    session_expires: 30 * 60,
     session_store: 'default',
     session_redis_host: '10.211.55.16',
     session_redis_port: 6379,
+    session_redis_pass: 'admin',
 
     /**
      * log 日志配置
@@ -30,11 +40,14 @@ module.exports = {
     log_mongodb_connection: 'mongodb://10.211.55.16:27017/mydb',
 
     /**
-     * api mock
+     * api mock 配置
+     *
+     * mock_api_switch：
      * 关闭 'off'
      * 打开 'on'
      *
-     * api_set {apiName: http状态(200,500)} 例如：{'testApi':200} 目前只支持：200请求成功；500请求api服务器失败
+     * mock_api_set：
+     * {apiName: http状态(200,500)} 例如：{'testApi1':200, 'testApi2':500} 目前只支持：200请求成功；500请求api服务器失败
      */
     mock_api_switch: 'off',
     mock_api_set: {}
