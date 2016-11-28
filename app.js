@@ -11,17 +11,16 @@ var session = require('./session');
 var routeLoad = require('./route');
 
 require('./log');
-//endregion
 
-var app = express();
-
-//region 打印环境日志
+// 打印环境日志
 if (config.env_output_profile_to_console) {
     console.log('> run app')
     console.log('> config');
     console.log(config);
 }
 //endregion
+
+var app = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

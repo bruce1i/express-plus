@@ -15,7 +15,6 @@
  *  > If false, no logging occurs.
  */
 
-//region express+配置项
 var config = require('./config');
 var session = require('express-session');
 var RedisStore = require('connect-redis')(session);
@@ -75,7 +74,7 @@ module.exports = {
 
         return function (req, res, next) {
 
-            console.log('check session')
+            // console.log('check session')
             if (!req.session) {
                 return next(new Error('oh no')); // handle error
             }
