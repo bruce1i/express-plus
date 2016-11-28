@@ -32,17 +32,15 @@ module.exports = {
 
         var sessionOptions = {
             secret: 'express_plus',
-            resave: false,
+            resave: true,
+            rolling: true,
             saveUninitialized: true,
             cookie: {}
         };
 
         if (config.session_expires > 0) {
 
-            var expiresSecond = config.session_expires * second;
-            var expiresDate = new Date(Date.now() + gmt8 + expiresSecond);
-
-            sessionOptions.cookie.expires = expiresDate;
+            sessionOptions.cookie.maxAge = gmt8 + (config.session_expires * second);
         }
 
         if (config.session_store == 'redis') {
@@ -50,7 +48,7 @@ module.exports = {
             var storeOptions = {
                 host: config.session_redis_host,
                 port: config.session_redis_port,
-                // db: 1,
+                db: config.session_redis_db,
                 // prefix: 'bruce:',
                 logErrors: true
             };

@@ -10,20 +10,22 @@ module.exports = {
     /**
      * session 配置
      *
-     * session_expires:
-     * 过期时间，单位：秒. 0为不设置
+     * session_expires: 过期时间，单位：秒. 0为不设置
      *
-     * session_store:
-     * session存储模式(default/redis),default使用默认储存,不推荐使用在生产环境,会有内存泄漏问题。
+     * session_store: session存储模式
+     *  default 使用MemoryStore,不推荐使用在生产环境,会有内存泄漏问题
+     *  redis 使用redis数据库
      *
-     * session_redis_pass:
-     * redis密码
+     * session_redis_pass: redis密码
+     *
+     * session_redis_db: Database index to use
      */
-    session_expires: 30 * 60,
+    session_expires: 10 * 60,
     session_store: 'default',
     session_redis_host: '10.211.55.16',
     session_redis_port: 6379,
     session_redis_pass: 'admin',
+    session_redis_db: 0,
 
     /**
      * log 日志配置
