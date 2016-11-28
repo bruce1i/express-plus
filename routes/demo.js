@@ -16,6 +16,7 @@ module.exports = function (app, control) {
 
     app.get('/demo/redis', control('demo/index:testRedisSession'));
 
+    app.get('/demo/404', control('demo/index:test404'));
 
     /** openApi (openApi用于本站自己提供的api) */
     app.get('/api/demo1', control('demo/openApi:demo1'));

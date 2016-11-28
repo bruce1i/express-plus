@@ -9,6 +9,7 @@ var bodyParser = require('body-parser');
 var config = require('./config');
 var session = require('./session');
 var routeLoad = require('./route');
+var except = require('./class/exception');
 
 require('./log');
 
@@ -41,11 +42,12 @@ app.use(session.check());
 // 载入路由
 routeLoad(app);
 
-// catch 404 and forward to error handler
+// catch 404 and forward to 404 page
 app.use(function (req, res, next) {
-    var err = new Error('Not Found');
-    err.status = 404;
-    next(err);
+
+    // code here to record log.
+
+    res.render('error404');
 });
 
 // error handlers
@@ -65,11 +67,16 @@ if (app.get('env') === 'development') {
 // production error handler
 // no stacktraces leaked to user
 app.use(function (err, req, res, next) {
-    res.status(err.status || 500);
-    res.render('error', {
-        message: err.message,
-        error: {}
-    });
+    if (err instanceof except.ApiError) {
+        res.render('error404');
+    }
+    else {
+        res.status(err.status || 500);
+        res.render('error', {
+            message: err.message,
+            error: {}
+        });
+    }
 });
 
 

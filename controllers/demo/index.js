@@ -4,8 +4,14 @@
 
 var httpsender = require('../../httpsender');
 var winston = require('winston');
+var except = require('../../class/exception');
 
 module.exports = {
+
+    test404: function (req, res, next) {
+
+        next(new except.ApiError());
+    },
 
     testRedisSession: function (req, res, next) {
 
