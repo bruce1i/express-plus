@@ -1,6 +1,18 @@
 /**
  * api请求方法（Promise调用）
  *
+ * 请求报错返回的对象:
+ {
+     type: 0,
+     error: error,
+     message: '请求出错',
+     reqArgs: args
+ }
+ * 只有type为0时，才有error对象（requestjs返回的错误信息）
+ * 0: 标准api请求返回的报错（请求报错）
+ * 1: json转换时出错
+ * -1: mock请求出错
+ *
  * 警告：不能在promise里面直接抛异常(throw new Error())。需要reject，调用者在使用catch自己捕获处理。
  * (node:5542) UnhandledPromiseRejectionWarning: Unhandled promise rejection (rejection id: 2): Error: tets
  * (node:5542) DeprecationWarning: Unhandled promise rejections are deprecated. In the future, promise rejections that are not handled will terminate the Node.js process with a non-zero exit code.
@@ -96,9 +108,10 @@ function one(args) {
 
                 if (error) {
                     reject({
-                        rawError: error,
-                        errMessage: '请求出错',
-                        requestObj: args
+                        type: 0,
+                        error: error,
+                        message: '请求出错',
+                        reqArgs: args
                     });
                 }
                 else {
@@ -113,8 +126,9 @@ function one(args) {
                         catch (e) {
                             /** 转换json失败，请求标示为失败 */
                             reject({
-                                errMessage: '解析json数据出错',
-                                requestObj: args
+                                type: 1,
+                                message: '解析json数据出错',
+                                reqArgs: args
                             });
                         }
                     }
@@ -160,8 +174,9 @@ function isMock(args, resolve, reject) {
 
         if (apiStatus == 500) {
             reject({
-                errMessage: '请求出错(mock)',
-                requestObj: args
+                type: -1,
+                message: '请求出错(mock)',
+                reqArgs: args
             });
         }
         else if (apiStatus == 200) {

@@ -14,6 +14,11 @@ module.exports = {
     log_save_to_file: false,
     log_file_name: 'err-file.log',
     log_save_to_mongodb: false,
-    log_mongodb_connection: 'mongodb://sa:sa@10.211.55.16:27017/mydb'
+    log_mongodb_connection: 'mongodb://sa:sa@10.211.55.16:27017/mydb',
+
+    mock_api_switch: 'on',
+    mock_api_set: {
+        demo1: 500
+    }
 
 };

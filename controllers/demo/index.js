@@ -10,7 +10,15 @@ module.exports = {
 
     test404: function (req, res, next) {
 
-        next(new except.ApiError());
+        httpsender
+            .request({api: 'get:demo1', params: {a: 34}})
+            .then(function (data) {
+                console.log(data);
+                console.log('get data success');
+            })
+            .catch(function (err) {
+                next(new except.ApiError(err));
+            });
     },
 
     testRedisSession: function (req, res, next) {

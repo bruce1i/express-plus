@@ -10,6 +10,7 @@ var config = require('./config');
 var session = require('./session');
 var routeLoad = require('./route');
 var except = require('./class/exception');
+var winston = require('winston');
 
 require('./log');
 
@@ -67,14 +68,33 @@ if (app.get('env') === 'development') {
 // production error handler
 // no stacktraces leaked to user
 app.use(function (err, req, res, next) {
+    var ip = req.headers['x-forwarded-for'] ||
+        req.connection.remoteAddress ||
+        req.socket.remoteAddress ||
+        req.connection.socket.remoteAddress;
+
     if (err instanceof except.ApiError) {
+        var metadata = {
+            ip: ip,
+            url: req.url,
+            type: err.type,
+            error: err.error,
+            message: err.message,
+            reqArgs: err.reqArgs
+        };
+
+        if (err.type != -1) {
+            winston.error(err.name, metadata);
+        }
+
         res.render('error404');
     }
     else {
         res.status(err.status || 500);
         res.render('error', {
             message: err.message,
-            error: {}
+            // error: {}
+            error: err //调试用
         });
     }
 });

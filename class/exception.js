@@ -13,11 +13,14 @@ class Page404Error extends Error {
 }
 
 class ApiError extends Error {
-    constructor(message) {
+    constructor({type, error = '', message, reqArgs}) {
         super();
 
         this.name = this.constructor.name;
-        this.message = message || 'API请求出错';
+        this.type = type;
+        this.error = error;
+        this.message = message;
+        this.reqArgs = reqArgs;
     }
 }
 
