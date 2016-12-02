@@ -25,11 +25,9 @@ class proxy {
                 }
             })
             .catch(function (error) {
-                that.req.json({error: error});
+                that.res.json({error: 500});
             });
     }
 }
 
-module.exports = {
-    request: proxy
-};
+module.exports = proxy;
