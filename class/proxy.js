@@ -6,9 +6,10 @@ var httpsender = require('../httpsender');
 var except = require('./exception');
 
 class proxy {
-    constructor(req, res) {
+    constructor(req, res, next) {
         this.req = req;
         this.res = res;
+        this.next = next;
     }
 
     request(args) {
@@ -25,7 +26,7 @@ class proxy {
                 }
             })
             .catch(function (error) {
-                that.res.json({error: 500});
+                that.next(new except.ProxyError(error));
             });
     }
 }

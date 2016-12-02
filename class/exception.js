@@ -24,6 +24,12 @@ class ApiError extends Error {
     }
 }
 
+class ProxyError extends ApiError {
+    constructor({type, error = '', message, reqArgs}) {
+        super({type: type, error: error, message: message, reqArgs: reqArgs});
+    }
+}
+
 class NotLoginError extends Error {
     constructor(message) {
         super();
@@ -36,5 +42,6 @@ class NotLoginError extends Error {
 module.exports = {
     Page404Error: Page404Error,
     ApiError: ApiError,
+    ProxyError: ProxyError,
     NotLoginError: NotLoginError
 };

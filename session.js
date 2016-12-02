@@ -27,7 +27,6 @@ module.exports = {
     getConf: function () {
 
         var second = 1000;
-        var gmt8 = 8 * 60 * 60 * second; // 转换为北京时间
 
         var sessionOptions = {
             secret: 'express_plus',
@@ -39,7 +38,7 @@ module.exports = {
 
         if (config.session_expires > 0) {
 
-            sessionOptions.cookie.maxAge = gmt8 + (config.session_expires * second);
+            sessionOptions.cookie.maxAge = config.env_tz + (config.session_expires * second);
         }
 
         if (config.session_store == 'redis') {
