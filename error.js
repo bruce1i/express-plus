@@ -25,7 +25,13 @@ module.exports = function (err, req, res, next) {
         time_ms: currDate.getTime()
     };
 
-    if (err instanceof except.ApiError) {
+    if (err instanceof except.Page404Error) {
+        metadata.message = err.message;
+
+        winston.error(err.name, metadata);
+        res.render('error404');
+    }
+    else if (err instanceof except.ApiError) {
         metadata.type = err.type;
         metadata.error = err.error;
         metadata.message = err.message;

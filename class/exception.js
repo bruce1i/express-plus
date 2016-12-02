@@ -3,12 +3,11 @@
  */
 
 class Page404Error extends Error {
-    constructor(message) {
+    constructor(message = '页面不存在') {
         super();
 
         this.name = this.constructor.name;
-        this.message = message || '页面不存在';
-        this.status = 404;
+        this.message = message;
     }
 }
 

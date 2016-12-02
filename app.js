@@ -10,12 +10,13 @@ var config = require('./config');
 var session = require('./session');
 var routeLoad = require('./route');
 var errorHandler = require('./error');
+var except = require('./class/exception');
 
 require('./log');
 
 // 打印环境日志
 if (config.env_output_profile_to_console) {
-    console.log('> run app')
+    console.log('> run app');
     console.log('> config');
     console.log(config);
 }
@@ -44,10 +45,7 @@ routeLoad(app);
 
 // catch 404 and forward to 404 page
 app.use(function (req, res, next) {
-
-    // code here to record log.
-
-    res.render('error404');
+    next(new except.Page404Error());
 });
 
 // error handlers
