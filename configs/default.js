@@ -48,8 +48,12 @@ module.exports = {
      * http_sender_max_queue: 同时请求最大连接数（队列）
      * 0，没有队列大小限制
      * 推荐，200；也可以根据实际情况调整
+     *
+     * http_sender_queue_timeout: 队列排队超时时间（毫秒）
+     * 0, 没有超时限制
      */
     http_sender_max_queue: 200,
+    http_sender_queue_timeout: 20 * 1000,
 
     /**
      * api mock 配置

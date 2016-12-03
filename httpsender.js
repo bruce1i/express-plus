@@ -66,16 +66,28 @@ function one(args) {
             return;
         }
 
-        queue(args, resolve, reject);
+        queue(args, resolve, reject, Date.now());
     });
 
     return p;
 }
 
-function queue(args, resolve, reject) {
+function queue(args, resolve, reject, time) {
 
     if (queueNum >= config.http_sender_max_queue && config.http_sender_max_queue != 0) {
-        setTimeout(queue, 0, args, resolve, reject);
+        var waitTime = Date.now() - time;
+
+        if (waitTime > config.http_sender_queue_timeout && config.http_sender_queue_timeout != 0) {
+            reject({
+                type: 12,
+                error: {code: 'QUEUETIMEOUT'},
+                message: '队列超时',
+                reqArgs: args
+            });
+            return;
+        }
+
+        setTimeout(queue, 0, args, resolve, reject, time);
         return;
     }
 
