@@ -8,6 +8,19 @@ var except = require('../../class/exception');
 
 module.exports = {
 
+    yali: function (req, res, next) {
+        httpsender
+            .request({
+                url: 'http://api.v2.maiche.com/api/open/car-basic/get-all-car-count-info.htm'
+            })
+            .then(function (data) {
+                res.send('hello');
+            })
+            .catch(function (err) {
+                next(new except.ApiError(err));
+            })
+    },
+
     test404: function (req, res, next) {
 
         httpsender

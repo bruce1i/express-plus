@@ -23,6 +23,7 @@ express+是在express的基础上提供了辅助方法，让express用起来更�
 * demo示例调整
 * 增加了自定义异常和处理
 * 增加proxy代理类，方便快速构建代理一个外部api
+* httpsender增加了队列控制
 
 ##上次日志
 * httpsender 替代 api-request

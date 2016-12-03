@@ -43,6 +43,15 @@ module.exports = {
     log_mongodb_connection: 'mongodb://10.211.55.16:27017/mydb',
 
     /**
+     * http sender 配置
+     *
+     * http_sender_max_queue: 同时请求最大连接数（队列）
+     * 0，没有队列大小限制
+     * 推荐，200；也可以根据实际情况调整
+     */
+    http_sender_max_queue: 200,
+
+    /**
      * api mock 配置
      *
      * mock_api_switch：

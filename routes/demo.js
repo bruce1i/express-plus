@@ -22,4 +22,7 @@ module.exports = function (app, control) {
     app.get('/api/demo1', control('demo/openApi:demo1'));
 
     app.post('/api/demo2', control('demo/openApi:demo2'));
+
+    // test
+    app.get('/test', control('demo/index:yali'));
 };
