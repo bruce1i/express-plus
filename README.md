@@ -1,7 +1,7 @@
 #express-plus
 
 ##版本
-express+: 1.2.0
+express+: 1.2.1
 
 base express: ~4.13.4
 
@@ -17,6 +17,7 @@ express+是在express的基础上提供了辅助方法，让express用起来更�
 * 提供自定义异常和处理
 
 ##更新日志
+* 1.2.1 增加session控制开关
 * 控制器重构，一个控制器下支持多个方法：control('控制器文件:控制器方法')
 * session重构，支持过期时间，redis连接密码和db index设置
 * 增加api mock数据操作

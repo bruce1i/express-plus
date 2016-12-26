@@ -37,8 +37,10 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 // session
-app.use(session.getConf());
-app.use(session.check());
+if (config.session_switch) {
+    app.use(session.getConf());
+    app.use(session.check());
+}
 
 // 载入路由
 routeLoad(app);

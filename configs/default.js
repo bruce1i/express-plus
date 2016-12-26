@@ -11,6 +11,10 @@ module.exports = {
     /**
      * session 配置
      *
+     * session_switch：session开关
+     * 关闭 false
+     * 打开 true
+     *
      * session_expires: 过期时间，单位：秒. 0为不设置
      *
      * session_store: session存储模式
@@ -21,6 +25,7 @@ module.exports = {
      *
      * session_redis_db: Database index to use
      */
+    session_switch: false,
     session_expires: 10 * 60,
     session_store: 'default',
     session_redis_host: '10.211.55.16',
