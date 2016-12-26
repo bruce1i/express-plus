@@ -4,6 +4,7 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var compression = require('compression');
 
 //region express+配置项
 var config = require('./config');
@@ -23,6 +24,11 @@ if (config.env_output_profile_to_console) {
 //endregion
 
 var app = express();
+
+// gzip设置
+if (config.env_gzip) {
+    app.use(compression());
+}
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

@@ -7,6 +7,7 @@ module.exports = {
     env: 'develop',
     env_output_profile_to_console: false,
     env_tz: 8 * 60 * 60 * 1000, // 转换为北京时间时差
+    env_gzip: false, // gzip压缩
 
     /**
      * session 配置
