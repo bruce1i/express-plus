@@ -1,5 +1,7 @@
 /**
  * 测试api
+ *
+ * req.headers['content-type'] 查看请求的内容类型
  */
 
 module.exports = {
