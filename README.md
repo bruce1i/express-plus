@@ -1,7 +1,7 @@
 #express-plus
 
 ##版本
-express+: 1.3.1
+express+: 1.3.2
 
 base express: ~4.13.4
 
@@ -16,11 +16,14 @@ express+是在express的基础上提供了辅助方法，让express用起来更�
 * 提供api mock数据系统
 * 提供自定义异常和处理
 * 提供了gzip压缩控制
+* 提供render基类，为模版提供全局变量
+* 提供proxy基类，简单快速代理api接口
 
 ##更新日志
-* **1.3.1**当bodyParser无法解析为json对象时，直接返回原始body字符串
+* **1.3.2**提供render基类，为模版提供全局变量
 
 ##历史日志
+* **1.3.1**当bodyParser无法解析为json对象时，直接返回原始body字符串
 * **1.3.0**增加gzip压缩开关
 * **1.2.1**增加session控制开关
 * 控制器重构，一个控制器下支持多个方法：control('控制器文件:控制器方法')
@@ -31,6 +34,40 @@ express+是在express的基础上提供了辅助方法，让express用起来更�
 * 增加proxy代理类，方便快速构建代理一个外部api
 * httpsender增加了队列控制
 * httpsender 替代 api-request
+
+##帮助
+###请求参数
+获取get参数 req.query.xxx;
+
+获取post参数 req.body.xxx; 
+
+获取路由参数 req.params.xxx;
+
+###session
+设置session req.session.xxx = xxx;
+
+获取session req.session.xxx;
+
+###日志
+var winston = require('winston');
+
+winston.info('another way to log info level');
+
+winston.error('test error level');
+
+winston.warn('test warn level');
+
+winston.info('test info level');
+
+winston.verbose('test verbose level');
+
+winston.debug('test debug level');
+
+winston.silly('test silly level');
+
+winston.info('test metadata', {anything: 'This is metadata', two: 'heool,sdfs'});
+
+winston.profile('test profile');
 
 
 
