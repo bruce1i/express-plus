@@ -1,7 +1,7 @@
 #express-plus
 
 ##版本
-express+: 1.3.2
+express+: 1.3.3
 
 base express: ~4.13.4
 
@@ -20,9 +20,10 @@ express+是在express的基础上提供了辅助方法，让express用起来更�
 * 提供proxy基类，简单快速代理api接口
 
 ##更新日志
-* **1.3.2**提供render基类，为模版提供全局变量
+* **1.3.3**升级httpsender支持路由参数
 
 ##历史日志
+* **1.3.2**提供render基类，为模版提供全局变量
 * **1.3.1**当bodyParser无法解析为json对象时，直接返回原始body字符串
 * **1.3.0**增加gzip压缩开关
 * **1.2.1**增加session控制开关

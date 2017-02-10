@@ -114,9 +114,33 @@ function queue(args, resolve, reject, time) {
 
         // 分解自定义api规则, 获取请求方式和api名称(0为method，1为api keyname)
         var apiItems = args.api.split(':');
+        var apiUrl = apiSet[apiItems[1]];
 
-        requestOptions.url = apiSet[apiItems[1]];
+        // 处理路由请求参数
+        if (args.routeParams != null) {
+            if (args.routeParams instanceof Array) {
+                // 数组路由参数，按顺序拼接
+                // 使用场景：不固定数量路由参数，根据数组顺序来拼接参数
+                for (var i = 0; i < args.routeParams.length; i++) {
 
+                    if (i == 0 && apiUrl.endsWith('/')) {
+                        apiUrl += args.routeParams[i];
+                        continue;
+                    }
+
+                    apiUrl += '/' + args.routeParams[i];
+                }
+            }
+            else {
+                // 对象路由参数，进行替换
+                // 使用场景：固定数量路由参数，事先定义好参数名，方便查看和理解接口参数
+                for (var pName in args.routeParams) {
+                    apiUrl = apiUrl.replace('{' + pName + '}', args.routeParams[pName]);
+                }
+            }
+        }
+
+        requestOptions.url = apiUrl;
         reqMethod = apiItems[0];
     }
     //endregion
