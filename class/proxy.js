@@ -15,6 +15,27 @@ class proxy {
     request(args) {
         var that = this;
 
+        if (that.req.files.length > 0) {
+            args.json = false;
+
+            var currFile = that.req.files[0];
+
+            var formData = {};
+            formData[currFile.fieldname] = {
+                value: currFile.buffer,
+                options: {
+                    filename: 'sfasf.png',
+                    contentType: 'image/jpeg'
+                }
+            };
+            formData['filename'] = 'attachment';
+
+            args.formData = formData;
+        }
+
+        console.log(args)
+
+
         httpsender
             .request(args)
             .then(function (data) {

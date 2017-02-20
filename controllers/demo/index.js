@@ -71,6 +71,10 @@ module.exports = {
 
     },
 
+    fileUpload: function (req, res, next) {
+        res.render('demo/file-upload');
+    },
+
     // 请求api
     requestApi: function (req, res, next) {
 

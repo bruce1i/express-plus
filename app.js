@@ -41,7 +41,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 // 扩展express默认body解析设置，当上面的两个body解析条件无法解析时，直接返回body原始字符串，留给控制器自己处理。
 // 备注：在控制器中用req.headers['content-type']查看请求的内容类型
-app.use(bodyParser.text({type: '*/*'}));
+// app.use(bodyParser.text({type: 'text/*'}));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 

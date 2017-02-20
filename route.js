@@ -5,6 +5,7 @@
 var fs = require('fs');
 var path = require('path');
 var control = require('./control');
+var form = require('./upload');
 
 function load(app) {
 
@@ -14,7 +15,7 @@ function load(app) {
 
         var fileName = './routes/' + item;
 
-        require(fileName)(app, control);
+        require(fileName)(app, control, form);
     });
 
 }

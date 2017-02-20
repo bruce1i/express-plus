@@ -10,5 +10,7 @@ module.exports = {
 
     'demo1': selfHost + 'api/demo1',
 
-    'demo2': selfHost + 'api/demo2'
+    'demo2': selfHost + 'api/demo2',
+
+    'uploadFileToServer': 'http://www.ckjapi.com/api/Common/upload'
 };

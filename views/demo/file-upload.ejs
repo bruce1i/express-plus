@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>表单提交</h1>
+<form action="/api/fileUpload" enctype="multipart/form-data" method="post">
+    <input type="file" name="ff1" multiple>
+    <input type="file" name="ff2">
+    <input type="text" name="t1">
+    <input type="text" name="t2" value="world">
+    <input type="submit" value="提交">
+</form>
+<hr>
+<form action="http://www.ckjapi.com/api/Common/upload" enctype="multipart/form-data" method="post">
+    <input type="file" name="file">
+    <input type="text" name="filename" value="attachment">
+    <input type="submit" value="提交">
+</form>
+<hr>
+<form action="/api/proxyFileUpload" enctype="multipart/form-data" method="post">
+    <input type="file" name="file">
+    <input type="text" name="filename" value="attachment">
+    <input type="submit" value="提交">
+</form>
+</body>
+</html>
