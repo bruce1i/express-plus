@@ -15,26 +15,41 @@ class proxy {
     request(args) {
         var that = this;
 
-        if (that.req.files.length > 0) {
-            args.json = false;
+        // 当没有传入params参数时，从请求中提取
+        if (args.params == null) {
+            args.params = {};
 
-            var currFile = that.req.files[0];
+            for (var key in that.req.query) {
+                args.params[key] = that.req.query[key];
+            }
 
-            var formData = {};
-            formData[currFile.fieldname] = {
-                value: currFile.buffer,
-                options: {
-                    filename: 'sfasf.png',
-                    contentType: 'image/jpeg'
-                }
-            };
-            formData['filename'] = 'attachment';
-
-            args.formData = formData;
+            for (var key in that.req.body) {
+                args.params[key] = that.req.body[key];
+            }
         }
 
-        console.log(args)
+        // 当没有传入formData参数时，从请求中提取
+        if (args.formData == null && that.req.files && that.req.files.length > 0) {
+            args.formData = {};
+            // 表单提交，清空args.params参数
+            args.params = {};
 
+            for (var i = 0; i < that.req.files.length; i++) {
+                var file = that.req.files[i];
+
+                args.formData[file.fieldname] = {
+                    value: file.buffer,
+                    options: {
+                        filename: file.originalname,
+                        contentType: file.mimetype
+                    }
+                };
+            }
+
+            for (var key in that.req.body) {
+                args.formData[key] = that.req.body[key];
+            }
+        }
 
         httpsender
             .request(args)

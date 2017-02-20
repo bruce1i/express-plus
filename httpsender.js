@@ -94,10 +94,10 @@ function queue(args, resolve, reject, time) {
     queueNum += 1;
 
     var requestOptions = {};
-    var reqMethod = '';
-
     // 设置超时
     requestOptions.timeout = 5000;
+    // 请求方法
+    var reqMethod = '';
 
     //region 处理请求url
     if (args.url != null) {
@@ -158,14 +158,23 @@ function queue(args, resolve, reject, time) {
     }
 
     if (reqMethod == 'get') {
+        // get请求，参数拼接在url上
         requestOptions.qs = args.params;
     }
     else {
+        // 非get请求，参数放在body中，以Content-type: application/x-www-form-urlencoded头发送
         requestOptions.form = args.params;
+    }
+
+    if (args.formData != null) {
+        // 表单数据，以multipart/form-data类型发送
+        requestOptions.formData = args.formData;
     }
     //endregion
 
-    // 设置数据返回格式（json默认为true）
+    // 设置数据返回解析格式（默认解析为json格式）
+    // 注意，是接口返回数据的格式。后端默认以application/json返回接口数据，所以默认对返回的数据进行了JSON.parse
+    // 如果不希望解析返回的数据，设置json为false，那么直接返回接口内容的字符串
     if (args.json == null) {
         args.json = true;
     }

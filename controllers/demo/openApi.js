@@ -33,6 +33,9 @@ module.exports = {
         console.log(req.body.t1);
         console.log(req.body.t2);
         console.log(req.headers['content-type']);
+        console.log('> ...')
+        console.log(req.query)
+        console.log(req.body)
 
         res.send('from upload');
     },

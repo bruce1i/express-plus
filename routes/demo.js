@@ -61,7 +61,7 @@ module.exports = function (app, control, form) {
     //         next();
     //     })
     // }, control('demo/openApi:fileUpload'));
-    app.post('/api/fileUpload', form.simple(200), control('demo/openApi:fileUpload'));
+    app.post('/api/fileUpload', form.simple(500), control('demo/openApi:fileUpload'));
 
     app.post('/api/proxyFileUpload', form.simple(400), control('demo/openApi:proxyFileUpload'));
 
