@@ -28,33 +28,29 @@ class proxy {
             }
         }
 
-        // 当没有传入formData参数时，从请求中提取
-        if (args.formData == null && that.req.files && that.req.files.length > 0) {
-            args.formData = {};
-            // 表单提交，清空args.params参数
-            args.params = {};
+        if (that.req.headers['content-type'].indexOf('multipart/form-data') > -1) {
+            // 有上传文件
+            if (that.req.files && that.req.files.length > 0) {
+                for (var i = 0; i < that.req.files.length; i++) {
+                    var file = that.req.files[i];
 
-            for (var i = 0; i < that.req.files.length; i++) {
-                var file = that.req.files[i];
-
-                args.formData[file.fieldname] = {
-                    value: file.buffer,
-                    options: {
-                        filename: file.originalname,
-                        contentType: file.mimetype
-                    }
-                };
+                    args.params[file.fieldname] = {
+                        value: file.buffer,
+                        options: {
+                            filename: file.originalname,
+                            contentType: file.mimetype
+                        }
+                    };
+                }
             }
 
-            for (var key in that.req.body) {
-                args.formData[key] = that.req.body[key];
-            }
+            args.type = 'form';
         }
 
         httpsender
             .request(args)
             .then(function (data) {
-                if (args.json) {
+                if (typeof data == 'object') {
                     that.res.json(data);
                 }
                 else {

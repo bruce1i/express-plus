@@ -150,25 +150,35 @@ function queue(args, resolve, reject, time) {
 
     //region 处理请求参数
     if (args.params == null) {
+        // 初始化params参数
         args.params = {};
     }
 
     if (args.random == true) {
+        // 添加随机数，防止缓存
         args.params._r = Math.floor(Math.random() * 100000000).toString();
     }
 
-    if (reqMethod == 'get') {
-        // get请求，参数拼接在url上
-        requestOptions.qs = args.params;
-    }
-    else {
-        // 非get请求，参数放在body中，以Content-type: application/x-www-form-urlencoded头发送
-        requestOptions.form = args.params;
-    }
+    if (args.type == null || args.type == 'default') {
+        // 标准get请求和post请求
 
-    if (args.formData != null) {
-        // 表单数据，以multipart/form-data类型发送
-        requestOptions.formData = args.formData;
+        if (reqMethod == 'get') {
+            // get请求，参数拼接在url上
+            requestOptions.qs = args.params;
+        }
+        else {
+            // 非get请求，参数放在body中，以Content-type: application/x-www-form-urlencoded头发送
+            requestOptions.form = args.params;
+        }
+    }
+    else if (args.type == 'form') {
+        // multipart/form-data的表单提交（文件上传）
+        requestOptions.formData = args.params;
+    }
+    else if (args.type == 'json') {
+        // application/json格式提交
+        requestOptions.headers = {'content-type': 'application/json'};
+        requestOptions.body = JSON.stringify(args.params);
     }
     //endregion
 

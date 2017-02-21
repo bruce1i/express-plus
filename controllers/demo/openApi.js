@@ -41,15 +41,17 @@ module.exports = {
     },
 
     proxyFileUpload: function (req, res, next) {
-        new proxy(req, res, next).request({api: 'post:uploadFileToServer'});
         console.log('proxyFileUpload')
+        console.log(req.headers['content-type']);
         console.log(req.files[0].buffer)
         console.log(new Buffer(req.files[0].buffer))
+
+        new proxy(req, res, next).request({api: 'post:uploadFileToServer'});
 
         // httpsender
         //     .request({
         //         api: 'post:uploadFileToServer',
-        //         formData: {
+        //         params: {
         //             file: {
         //                 value: req.files[0].buffer,
         //                 options: {
@@ -58,7 +60,8 @@ module.exports = {
         //                 }
         //             },
         //             filename: 'attachment'
-        //         }
+        //         },
+        //         type: 'form'
         //     })
         //     .then(function (data) {
         //         res.send(data);

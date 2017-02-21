@@ -2,27 +2,7 @@
  * 示例路由
  */
 
-var multer = require('multer');
-var upload = multer({
-    limits: {
-        fileSize: 200 * 1024
-    },
-    fileFilter: function (req, file, cb) {
-        console.log('> fileFilter')
-        console.log(req.body)
-        console.log(file)
-        console.log(cb)
-
-        if (file.mimetype != 'image/png') {
-            cb(null, false);
-        }
-        else {
-            cb(null, true)
-        }
-    }
-});
-
-module.exports = function (app, control, form) {
+module.exports = function (app, control, upload) {
 
     app.get('/', control('demo/index:home'));
 
@@ -45,34 +25,15 @@ module.exports = function (app, control, form) {
 
     app.post('/api/demo2', control('demo/openApi:demo2'));
 
-    // app.post('/api/fileUpload', upload.single('ff1'), control('demo/openApi:fileUpload'));
-    // app.post('/api/fileUpload', upload.any(), control('demo/openApi:fileUpload'));
-    // app.post('/api/fileUpload', function (req, res, next) {
-    //     upload.any()(req, res, function (err) {
-    //         console.log('> upload error');
-    //         console.log(err)
-    //         if (err) {
-    //             // 发生错误
-    //             res.send('upload error');
-    //             return
-    //         }
-    //
-    //         // 一切都好
-    //         next();
-    //     })
-    // }, control('demo/openApi:fileUpload'));
-    app.post('/api/fileUpload', form.simple(500), control('demo/openApi:fileUpload'));
-
-    app.post('/api/proxyFileUpload', form.simple(400), control('demo/openApi:proxyFileUpload'));
-
-    // upload.upload() upload.imgUpload() upload.multerSingle() upload.multerAll()
-    // upload.files upload.imgFiles
     /**
      *      upload.simple(200,'txt','jpg','png')
      *      upload.simple({size:300,ext:[]});
      *      upload.all()
      *      upload.single();
      */
+    app.post('/api/fileUpload', upload.simple(100), control('demo/openApi:fileUpload'));
+
+    app.post('/api/proxyFileUpload', upload.simple(400), control('demo/openApi:proxyFileUpload'));
 
     // test
     app.get('/test', control('demo/index:yali'));
