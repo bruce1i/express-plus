@@ -39,7 +39,9 @@ app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
-// 扩展express默认body解析设置，当上面的两个body解析条件无法解析时，直接返回body原始字符串，留给控制器自己处理。
+// 1.4.x版本开始，调整app.use(bodyParser.text({type: '*/*'})) 为 app.use(bodyParser.text({type: 'text/*'}))
+// 当content-type为文本类型时，返回原始字符串，使用req.body查看
+// 默认没有启用，有需要自己取消注释打开使用
 // 备注：在控制器中用req.headers['content-type']查看请求的内容类型
 // app.use(bodyParser.text({type: 'text/*'}));
 app.use(cookieParser());
