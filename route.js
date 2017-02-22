@@ -5,17 +5,28 @@
 var fs = require('fs');
 var path = require('path');
 var control = require('./control');
-var form = require('./upload');
 
 function load(app) {
 
-    var list = fs.readdirSync(path.join(__dirname, 'routes'));
+    // 载入中间件
+    var middleWare = {};
+    var middleList = fs.readdirSync(path.join(__dirname, 'routewares'));
 
-    list.forEach(function (item) {
+    middleList.forEach(function (item) {
+
+        var middleName = item.replace('.js', '');
+
+        middleWare[middleName] = require('./routewares/' + item);
+    });
+
+    // 载入路由
+    var routeList = fs.readdirSync(path.join(__dirname, 'routes'));
+
+    routeList.forEach(function (item) {
 
         var fileName = './routes/' + item;
 
-        require(fileName)(app, control, form);
+        require(fileName)(app, control, middleWare);
     });
 
 }
