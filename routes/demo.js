@@ -2,7 +2,7 @@
  * 示例路由
  */
 
-module.exports = function (app, control, upload) {
+module.exports = function (app, control, mware) {
 
     app.get('/', control('demo/index:home'));
 
@@ -31,9 +31,9 @@ module.exports = function (app, control, upload) {
      *      upload.all()
      *      upload.single();
      */
-    app.post('/api/fileUpload', upload.simple(200, 'png'), control('demo/openApi:fileUpload'));
+    app.post('/api/fileUpload', mware.upload.simple(200, 'png'), control('demo/openApi:fileUpload'));
 
-    app.post('/api/proxyFileUpload', upload.simple(400), control('demo/openApi:proxyFileUpload'));
+    app.post('/api/proxyFileUpload', mware.upload.simple(400), control('demo/openApi:proxyFileUpload'));
 
     // test
     app.get('/test', control('demo/index:yali'));
