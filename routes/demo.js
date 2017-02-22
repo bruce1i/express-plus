@@ -35,6 +35,8 @@ module.exports = function (app, control, mware) {
 
     app.post('/api/proxyFileUpload', mware.upload.simple(400), control('demo/openApi:proxyFileUpload'));
 
+    app.post('/api/proxyFileUpload', mware.forward.to({api:'get:testapi'}));
+
     // test
     app.get('/test', control('demo/index:yali'));
 };
