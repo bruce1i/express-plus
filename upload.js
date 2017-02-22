@@ -21,7 +21,7 @@ var upload = {
             wmv: 'video/x-ms-wmv',
             mp3: 'audio/mp3'
         };
-        var multerOpts = {};
+        var multerOpts = null;
         var multerAny = null;
 
         //region 获取参数，设置文件大小和文件类型
@@ -41,8 +41,6 @@ var upload = {
                 fileSize: fileSize
             },
             fileFilter: function (req, file, cb) {
-                console.log('> fileFilter')
-                console.log(file)
 
                 if (acceptAnyFiles) {
                     cb(null, true)
@@ -55,7 +53,9 @@ var upload = {
                     // cb(null, false)
 
                     // 不是指定类型，抛出异常
-                    cb(new Error('file type error'))
+                    var uploadError = new Error('File type error');
+                    uploadError.code = 'LIMIT_FILE_TYPE';
+                    cb(uploadError);
                 }
             }
         };
@@ -63,15 +63,19 @@ var upload = {
 
         return function (req, res, next) {
             multerAny(req, res, function (err) {
-                console.log('> upload middleware');
-                console.log(err)
 
                 if (err) {
                     // An error occurred when uploading
-                    // LIMIT_FILE_SIZE 文件大小
-                    console.log('upload file error');
-                    console.log(err.code)
-                    res.send('upload file error');
+                    if (err.code == 'LIMIT_FILE_TYPE') {
+                        res.json({error: {code: 'LIMIT_FILE_TYPE'}});
+                    }
+                    else if (err.code == 'LIMIT_FILE_SIZE') {
+                        res.json({error: {code: 'LIMIT_FILE_SIZE'}});
+                    }
+                    else {
+                        res.json({error: {code: 'OTHERS'}});
+                    }
+
                     return;
                 }
 

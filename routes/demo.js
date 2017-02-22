@@ -31,7 +31,7 @@ module.exports = function (app, control, upload) {
      *      upload.all()
      *      upload.single();
      */
-    app.post('/api/fileUpload', upload.simple(100), control('demo/openApi:fileUpload'));
+    app.post('/api/fileUpload', upload.simple(200, 'png'), control('demo/openApi:fileUpload'));
 
     app.post('/api/proxyFileUpload', upload.simple(400), control('demo/openApi:proxyFileUpload'));
 
