@@ -28,7 +28,7 @@ class proxy {
             }
         }
 
-        if (that.req.headers['content-type'].indexOf('multipart/form-data') > -1) {
+        if (that.req.headers['content-type'] && that.req.headers['content-type'].indexOf('multipart/form-data') > -1) {
             // 有上传文件
             if (that.req.files && that.req.files.length > 0) {
                 for (var i = 0; i < that.req.files.length; i++) {
