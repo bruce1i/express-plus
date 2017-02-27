@@ -19,7 +19,7 @@
  */
 
 var request = require('request');
-var apiSet = require('./api');
+var apiSet = require('../api/set');
 // mock需要的引用
 var config = require('./config');
 var fs = require('fs');
@@ -261,7 +261,7 @@ function isMock(args, resolve, reject) {
         }
         else if (apiStatus == 200) {
 
-            var jsonFileSrc = path.join(__dirname, 'mock/api/' + mockApiName + '.json');
+            var jsonFileSrc = path.join(__dirname, '../mock/api/' + mockApiName + '.json');
 
             var result = fs.readFileSync(jsonFileSrc, 'utf8');
 

@@ -2,9 +2,9 @@
  * 示例控制器
  */
 
-var httpsender = require('../../httpsender');
+var httpsender = require('../../cores/httpsender');
 var winston = require('winston');
-var except = require('../../class/exception');
+var except = require('../../classes/exception');
 
 module.exports = {
 

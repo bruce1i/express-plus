@@ -2,7 +2,7 @@
  * api代理
  */
 
-var httpsender = require('../httpsender');
+var httpsender = require('../cores/httpsender');
 var except = require('./exception');
 
 class proxy {

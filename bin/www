@@ -4,7 +4,7 @@
  * Module dependencies.
  */
 
-var app = require('../app');
+var app = require('../cores/app');
 var debug = require('debug')('express-plus-empty:server');
 var http = require('http');
 

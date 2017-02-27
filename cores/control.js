@@ -7,7 +7,7 @@ module.exports = function (src) {
 
     var srcItems = src.split(':');
 
-    var callback = require('./controllers/' + srcItems[0])[srcItems[1]];
+    var callback = require('../controllers/' + srcItems[0])[srcItems[1]];
 
     return callback;
 };

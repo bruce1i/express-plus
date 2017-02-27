@@ -6,7 +6,7 @@
  * 请求转发中间件
  */
 
-var proxy = require('../class/proxy');
+var proxy = require('../classes/proxy');
 
 var forward = {
     to: function (args) {

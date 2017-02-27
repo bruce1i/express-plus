@@ -2,7 +2,7 @@
  * Created by lixun on 2016/12/2.
  */
 
-var except = require('../class/exception');
+var except = require('../classes/exception');
 
 try {
     throw new except.ProxyError({});
