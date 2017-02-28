@@ -5,6 +5,7 @@
 var httpsender = require('../../cores/httpsender');
 var winston = require('winston');
 var except = require('../../classes/exception');
+var render = require('../../classes/render');
 
 module.exports = {
 
@@ -50,7 +51,9 @@ module.exports = {
 
     home: function (req, res, next) {
 
-        res.render('demo/index');
+        // res.render('demo/index');
+
+        new render(res, 'demo/index');
 
     },
 
