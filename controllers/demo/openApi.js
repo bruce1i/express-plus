@@ -4,8 +4,8 @@
  * req.headers['content-type'] 查看请求的内容类型
  */
 
-var proxy = require('../../class/proxy');
-var httpsender = require('../../httpsender');
+var proxy = require('../../classes/proxy');
+var httpsender = require('../../cores/httpsender');
 var request = require('request');
 
 module.exports = {

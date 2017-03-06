@@ -72,6 +72,15 @@ module.exports = {
      * {apiName: http状态(200,500)} 例如：{'testApi1':200, 'testApi2':500} 目前只支持：200请求成功；500请求api服务器失败
      */
     mock_api_switch: 'off',
-    mock_api_set: {}
+    mock_api_set: {},
+
+    /**
+     * view params 配置
+     * 设置view页面全局参数
+     */
+    view_params: {
+        __global__: 'this is a global param'
+    }
+
 
 };

@@ -4,7 +4,7 @@
 
 var winston = require('winston');
 var config = require('./config');
-var except = require('./class/exception');
+var except = require('../classes/exception');
 
 module.exports = function (err, req, res, next) {
 

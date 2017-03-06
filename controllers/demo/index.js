@@ -2,9 +2,9 @@
  * 示例控制器
  */
 
-var httpsender = require('../../httpsender');
+var httpsender = require('../../cores/httpsender');
 var winston = require('winston');
-var except = require('../../class/exception');
+var except = require('../../classes/exception');
 
 module.exports = {
 
@@ -50,8 +50,7 @@ module.exports = {
 
     home: function (req, res, next) {
 
-        res.render('demo/index');
-
+        res.view('demo/index')
     },
 
     getSession: function (req, res, next) {
@@ -85,7 +84,7 @@ module.exports = {
         //     })
         //     .then(function (data) {
         //
-        //         res.render('demo/api', {data: data});
+        //         res.view('demo/api', {data: data});
         //     })
         //     .catch(function (error) {
         //         console.log(error)

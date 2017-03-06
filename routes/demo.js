@@ -6,6 +6,12 @@ module.exports = function (app, control, mware) {
 
     app.get('/', control('demo/index:home'));
 
+    app.get('/view', mware.response.render('demo/index'));
+
+    app.get('/json', mware.response.json({a: 3}));
+
+    app.get('/send', mware.response.send("hello"));
+
     app.get('/demo/set-session', control('demo/index:setSession'));
 
     app.get('/demo/get-session', control('demo/index:getSession'));
@@ -35,7 +41,9 @@ module.exports = function (app, control, mware) {
 
     app.post('/api/proxyFileUpload', mware.upload.simple(400), control('demo/openApi:proxyFileUpload'));
 
-    app.post('/api/proxyFileUpload', mware.forward.to({api:'get:testapi'}));
+    app.post('/api/proxyFileUpload', mware.forward.to({api: 'get:testapi'}));
+
+    // app.post('/api/proxyFileUpload', mware.view.view('home'));
 
     // test
     app.get('/test', control('demo/index:yali'));
