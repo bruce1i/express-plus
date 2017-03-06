@@ -1,10 +1,10 @@
 /**
- * render基类
+ * view基类
  */
 
 var config = require('../cores/config');
 
-class render {
+class view {
     constructor(res, view, params) {
         if (params == null) {
             params = {};
@@ -21,4 +21,4 @@ class render {
     }
 }
 
-module.exports = render;
+module.exports = view;

@@ -6,11 +6,20 @@
  * 响应中间件
  */
 
+var view = require('../classes/view');
+
 var response = {
     render: function (viewname, params) {
 
         return function (req, res, next) {
             res.render(viewname, params || {});
+        };
+    },
+
+    view: function (viewname, params) {
+
+        return function (req, res, next) {
+            new view(res, viewname, params);
         };
     },
 

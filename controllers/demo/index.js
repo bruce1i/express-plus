@@ -5,7 +5,6 @@
 var httpsender = require('../../cores/httpsender');
 var winston = require('winston');
 var except = require('../../classes/exception');
-var render = require('../../classes/render');
 
 module.exports = {
 
@@ -51,10 +50,7 @@ module.exports = {
 
     home: function (req, res, next) {
 
-        // res.render('demo/index');
-
-        new render(res, 'demo/index');
-
+        res.view('demo/index')
     },
 
     getSession: function (req, res, next) {
@@ -88,7 +84,7 @@ module.exports = {
         //     })
         //     .then(function (data) {
         //
-        //         res.render('demo/api', {data: data});
+        //         res.view('demo/api', {data: data});
         //     })
         //     .catch(function (error) {
         //         console.log(error)
