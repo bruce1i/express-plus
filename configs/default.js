@@ -75,6 +75,19 @@ module.exports = {
     mock_api_set: {},
 
     /**
+     * user-session mock 配置
+     *
+     * mock_user_session_switch: 模拟用户会话开关
+     * 关闭 false
+     * 打开 true
+     *
+     * mock_user_session_data_file: 模拟用户数据文件，在mock/user文件夹下定义
+     * 例: mock_user_session_data_file: 'u1.json',会自动读取mock/user/u1.json文件的数据存入session
+     */
+    mock_user_session_switch: false,
+    mock_user_session_data_file: 'u1.json',
+
+    /**
      * view params 配置
      * 设置view页面全局参数
      */
