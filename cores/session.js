@@ -47,12 +47,15 @@ module.exports = {
                 host: config.session_redis_host,
                 port: config.session_redis_port,
                 db: config.session_redis_db,
-                // prefix: 'bruce:',
                 logErrors: true
             };
 
             if (config.session_redis_pass != '') {
                 storeOptions.pass = config.session_redis_pass;
+            }
+
+            if (config.session_redis_prefix != '') {
+                storeOptions.prefix = config.session_redis_prefix;
             }
 
             if (config.session_expires > 0) {

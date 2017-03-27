@@ -25,6 +25,8 @@ module.exports = {
      * session_redis_pass: redis密码
      *
      * session_redis_db: Database index to use
+     *
+     * session_redis_prefix: 可以理解为组名或表名，默认"sess:"。注意，表名后用":"冒号结尾
      */
     session_switch: false,
     session_expires: 10 * 60,
@@ -33,6 +35,7 @@ module.exports = {
     session_redis_port: 6379,
     session_redis_pass: 'admin',
     session_redis_db: 0,
+    session_redis_prefix: '',
 
     /**
      * log 日志配置
