@@ -1,7 +1,7 @@
 #express-plus
 
 ##版本
-express+: 1.5.2
+express+: 1.5.3
 
 base express: ~4.13.4
 
@@ -21,9 +21,10 @@ express+是在express的基础上提供了辅助方法，让express用起来更�
 * 提供了常用路由中间件（请求转发，文件上传，登录检测等）
 
 ##更新日志
-* **1.5.2**当session使用redis时，可以设置prefix
+* **1.5.3**修复forward中间件导致缓存假象bug
 
 ##历史日志
+* **1.5.2**当session使用redis时，可以设置prefix
 * **1.5.1**增加user-session类，方便管理用户登录会话信息和检测
 * **1.5.1**增加检查路由中间件，通过login方法来拦截未登录用户
 * **1.5.1**提供mock用户会话配置项

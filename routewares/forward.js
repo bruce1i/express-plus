@@ -10,9 +10,8 @@ var proxy = require('../classes/proxy');
 
 var forward = {
     to: function (args) {
-
         return function (req, res, next) {
-            new proxy(req, res, next).request(args);
+            new proxy(req, res, next).request({api: args.api});
         };
     }
 };
