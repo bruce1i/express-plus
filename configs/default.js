@@ -91,12 +91,14 @@ module.exports = {
     mock_user_session_data_file: 'u1.json',
 
     /**
-     * view params 配置
-     * 设置view页面全局参数
+     * global 全局配置参数
+     * 设置view页面全局参数、api接口全局参数和页面js全局参数
+     *
+     * api接口使用: config.global.xxx
+     * 前端js/view使用: _config.global.xxx
      */
-    view_params: {
-        __global__: 'this is a global param'
+    global: {
+        // name: 'this is a global param'
     }
-
 
 };

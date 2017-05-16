@@ -11,10 +11,11 @@ class view {
         }
 
         // 添加全局变量到模板参数
-        if (config.view_params) {
-            for (var key in config.view_params) {
-                params[key] = config.view_params[key];
-            }
+        if (config.global) {
+
+            params._config = {
+                global: config.global
+            };
         }
 
         res.render(view, params);
