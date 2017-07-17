@@ -30,6 +30,17 @@ if (config.env_gzip) {
     app.use(compression());
 }
 
+// 配置robots.txt爬虫屏蔽文件，非正式环境一律禁止爬取，正式环境默认不屏蔽，可以自己在robots.txt中配置
+app.get('/robots.txt', function (req, res, next) {
+    if (config.env == 'www') {
+        next();
+    }
+    else {
+        res.type('text/plain');
+        res.send("User-agent: *\nDisallow: /");
+    }
+});
+
 // view engine setup
 app.set('views', path.join(__dirname, '../views'));
 app.set('view engine', 'ejs');

@@ -1,7 +1,7 @@
 #express-plus
 
 ##版本
-express+: 1.6.0
+express+: 1.7.0
 
 base express: ~4.13.4
 
@@ -21,13 +21,15 @@ express+是在express的基础上提供了辅助方法，让express用起来更�
 * 提供了常用路由中间件（请求转发，文件上传，登录检测等）
 
 ##更新日志
+* **1.7.0**增加robots.txt，可以配置在正式环境下爬虫的规则，测试环境下默认屏蔽爬虫
+* **1.7.0**修改configs/_product.js为configs/_www.js (注意，非覆盖升级，请手动修改该文件名)
+
+##历史日志
 * **1.6.0**修改配置文件中的模板变量view_params为global全局变量
 * **1.6.0**修改view基类，支持global全局变量
 * **1.6.0**新增head.ejs和html.ejs前端include标准模版，支持前端global全局变量
 * **1.6.0**修改css文件夹为style文件夹
 * **1.6.0**新增js/lib文件夹，内置基础js类库
-
-##历史日志
 * **1.5.3**修复forward中间件导致缓存假象bug
 * **1.5.2**当session使用redis时，可以设置prefix
 * **1.5.1**增加user-session类，方便管理用户登录会话信息和检测
